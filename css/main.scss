@@ -8,6 +8,25 @@
 $exercise: "Exercice";
 $exercise-en: "Exercise";
 
+// Theme variables
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --link-color: #0000ff;
+    --code-background: #eeeeee;
+    --code-color: #d00000;
+    --border-color: #aaaaaa;
+}
+
+.dark-theme {
+    --background-color: #222222;
+    --text-color: #ffffff;
+    --link-color: #4da6ff;
+    --code-background: #333333;
+    --code-color: #ff6666;
+    --border-color: #666666;
+}
+
 /* Page Structure */
 html, input, textarea, select {
     font-family: 'Marcellus', serif;
@@ -21,7 +40,7 @@ code, .code {
     overflow-wrap:break-word;
 }
 footer {
-    border-top: solid thin black;
+    border-top: solid thin var(--text-color);
     font-size: smaller;
     margin-top: 4ex;
 }
@@ -33,12 +52,14 @@ body {
     margin: auto;
     padding-left: 20px;
     counter-reset: section exercise subsection subsubsection;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 h1 {
     font-size: 2em;
     .subtitle {
-	font-size: 0.5em;
-	color: #999;
+        font-size: 0.5em;
+        color: #999;
     }
 }
 h1, h2, footer { margin-left: -20px }
@@ -51,7 +72,6 @@ h3 {
 h2:before {
     counter-increment: section;
     content: counter(section) ". ";
-
 }
 h3:before{
     counter-increment: subsection;
@@ -63,13 +83,11 @@ h4:before{
     font-style: italic;
 }
 .exercise, .exercise-en {
-    /* margin-left: 1em; */
     box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 hsla(0, 0%, 0%, 0.19);
     padding: 0.5em 1em;
     margin-bottom: 26px;
 }
 .exercise:before, .exercise-en:before {
-    /* margin-left: -1em; */
     counter-increment: exercise;
     content: $exercise " " counter(exercise);
     font-weight: bold;
@@ -85,6 +103,7 @@ h4:before{
 /* Inline style */
 a {
     text-decoration: none;
+    color: var(--link-color);
     &:hover { text-decoration: underline }
 }
 dt {
@@ -94,10 +113,10 @@ ul.menu {
     list-style-type: none;
 
     li {
-	display: inline-block;
-	border-right: solid thin;
-	padding: 0 1ex;
-	&:last-child { border-right: none }
+        display: inline-block;
+        border-right: solid thin var(--text-color);
+        padding: 0 1ex;
+        &:last-child { border-right: none }
     }
 }
 .centered {
@@ -114,36 +133,35 @@ ul.menu {
 table { border-collapse: collapse }
 td, th { padding: 1ex; }
 table.pretty {
-    td:not(:first-child), 
+    td:not(:first-child),
     th:not(:first-child) {
-	border-left: solid thin black;
+        border-left: solid thin var(--text-color);
     }
     th {
-	border-bottom: solid thin black;
+        border-bottom: solid thin var(--text-color);
     }
 }
 
 /* Source code */
 pre, div.codeexample {
     clear: both;
-    background-color: #eee;
+    background-color: var(--code-background);
     border-radius: 4px;
-    border: solid thin #aaa;
+    border: solid thin var(--border-color);
     padding-left: 2ex;
-    /* Text will wrap when necessary, and on line breaks */
     white-space: pre-wrap;
     overflow-wrap:break-word;
 }
 :not(pre)>code {
-    color: #d00;
+    color: var(--code-color);
 }
 
 /* Horrible hack, waiting for CSS3 text-decoration */
 a code, code a {
-    border-bottom: dashed thin blue;
+    border-bottom: dashed thin var(--link-color);
 
     &:hover {
-	border-bottom: none;
+        border-bottom: none;
     }
 }
 
@@ -158,7 +176,7 @@ a code, code a {
 }
 .footnotes {
     @extend .footnotesize;
-    border-top: solid thin #888;
+    border-top: solid thin var(--border-color);
     margin-left: -20px;
     margin-top: 2em;
 }
@@ -181,5 +199,22 @@ blockquote.cite {
 
 /* Romain Lebreton */
 ol ol {
-  list-style-type: lower-roman;
+    list-style-type: lower-roman;
+}
+
+// Theme toggle button
+#theme-toggle {
+    padding: 10px 15px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: var(--link-color);
+        color: var(--background-color);
+    }
 }
